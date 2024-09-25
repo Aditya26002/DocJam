@@ -16,7 +16,7 @@ export const createDocument = async ({
     const metadata = {
       creatorId: userId,
       email,
-      title: "Untitled Document",
+      title: "Untitled",
     };
 
     const usersAccesses: RoomAccesses = {
@@ -33,7 +33,7 @@ export const createDocument = async ({
 
     return parseStringify(room);
   } catch (error) {
-    console.log(`Error in creating a room: ${error}`);
+    console.log(`Error happened while creating a room: ${error}`);
   }
 };
 
@@ -68,6 +68,7 @@ export const updateDocument = async (roomId: string, title: string) => {
     });
 
     revalidatePath(`/documents/${roomId}`);
+
     return parseStringify(updatedRoom);
   } catch (error) {
     console.log(`Error happened while updating a room: ${error}`);
@@ -113,6 +114,7 @@ export const updateDocumentAccess = async ({
           avatar: updatedBy.avatar,
           email: updatedBy.email,
         },
+        roomId,
       });
     }
 
@@ -134,7 +136,7 @@ export const removeCollaborator = async ({
     const room = await liveblocks.getRoom(roomId);
 
     if (room.metadata.email === email) {
-      throw new Error("You cannot remove yourself from the room");
+      throw new Error("You cannot remove yourself from the document");
     }
 
     const updatedRoom = await liveblocks.updateRoom(roomId, {
@@ -142,6 +144,9 @@ export const removeCollaborator = async ({
         [email]: null,
       },
     });
+
+    revalidatePath(`/documents/${roomId}`);
+    return parseStringify(updatedRoom);
   } catch (error) {
     console.log(`Error happened while removing a collaborator: ${error}`);
   }

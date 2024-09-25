@@ -11,6 +11,14 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 
+type Document = {
+  id: string;
+  metadata: {
+    title: string;
+  };
+  createdAt: string;
+};
+
 const Home = async () => {
   const clerkUser = await currentUser();
   if (!clerkUser) redirect("/sign-in");
@@ -39,7 +47,7 @@ const Home = async () => {
             />
           </div>
           <ul className="document-ul">
-            {roomDocuments.data.map(({ id, metadata, createdAt }: any) => (
+            {roomDocuments.data.map(({ id, metadata, createdAt }: Document) => (
               <li key={id} className="document-list-item">
                 <Link
                   href={`/documents/${id}`}
