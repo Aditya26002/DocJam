@@ -42,6 +42,7 @@ const ShareModal = ({
       userType: userType as UserType,
       updatedBy: user.info,
     });
+
     setLoading(false);
   };
 
@@ -49,7 +50,7 @@ const ShareModal = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
         <Button
-          className="flex gap-1 gradient-blue h-9 px-4"
+          className="gradient-blue flex h-9 gap-1 px-4"
           disabled={currentUserType !== "editor"}
         >
           <Image
@@ -69,8 +70,9 @@ const ShareModal = ({
             Select which users can view and edit this document
           </DialogDescription>
         </DialogHeader>
+
         <Label htmlFor="email" className="mt-6 text-blue-100">
-          Email Address
+          Email address
         </Label>
         <div className="flex items-center gap-3">
           <div className="flex flex-1 rounded-md bg-dark-400">

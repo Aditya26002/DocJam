@@ -1,5 +1,3 @@
-import React from "react";
-
 import {
   Select,
   SelectContent,
@@ -30,7 +28,7 @@ const UserTypeSelector = ({
         <SelectItem value="viewer" className="shad-select-item">
           Viewer
         </SelectItem>
-        <SelectItem value="Editor" className="shad-select-item">
+        <SelectItem value="editor" className="shad-select-item">
           Editor
         </SelectItem>
       </SelectContent>
