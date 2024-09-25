@@ -7,6 +7,8 @@ const nextConfig = {
   images: {
     remotePatterns: [{ protocol: "https", hostname: "img.clerk.com" }],
   },
+  output: "export",
+  reactStrictMode: true,
 };
 
 export default withSentryConfig(nextConfig, {
