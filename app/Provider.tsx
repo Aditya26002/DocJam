@@ -10,6 +10,8 @@ import {
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
   const { user: clerkUser } = useUser();
+  const currentUserEmail = clerkUser?.emailAddresses?.[0]?.emailAddress || "";
+
   return (
     <div>
       <LiveblocksProvider
@@ -21,7 +23,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
         resolveMentionSuggestions={async ({ text, roomId }) => {
           const roomUsers = await getDocumentUsers({
             roomId,
-            currentUser: clerkUser?.emailAddresses[0].emailAddress! || "",
+            currentUser: currentUserEmail,
             text,
           });
           return roomUsers;
